@@ -1,12 +1,14 @@
 const express = require("express");
-const fetch = require("node-fetch");
 const cors = require("cors");
+
+// Import do fetch do node-fetch
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 🔑 Chave do ChatGPT já incluída
+// Use variável de ambiente para a chave (mais seguro) ou coloque direto aqui para teste rápido
 const OPENAI_API_KEY = "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";
 
 app.post("/chat", async (req, res) => {
